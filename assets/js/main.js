@@ -1,17 +1,8 @@
-$(document).ready(function () {
-    console.log("On course for a Cool Change");
-});
+$(document).ready(init);
 
-$('html').onclick(function (e) {
-    e.preventDefault();
-    $('.overlay').addClass('hidden');
-});
+function init() {
 
-function hideOverlay() {
-    $('.overlay').addClass('hidden');
+    $('.overlay').one('click wheel', function () {
+        $('.overlay').addClass('hidden');
+    });
 }
-
-$('.overlay').on('click scroll', function () {
-    this.addClass('hidden');
-    this.off('click scroll');
-});

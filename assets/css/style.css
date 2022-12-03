@@ -1,0 +1,189 @@
+/* 
+* Avoid fixed sizes 
+* Use EM and REM
+* use min/max
+* mobile first
+* fonts, colours, spacing
+* media queries to add complexity (desktop styling)
+    * e.g. need columns in a div
+    * @media(min-width: 40em) {}
+* use 2 or max 3 breakpoints (see where problems are occurring) 
+* use 320px min VW for devices to test responsiveness
+* clamp(min, max, ideal) for font
+* width min() 
+*/
+
+:root {
+  /* typography */
+  --ff-primary: "Arial", sans-serif;
+  --ff-accent: Helvetica;
+
+  /* GLOBAL */
+  --fs-body: 1.3125rem;
+  --clr-body: var(--clr-neutral-800);
+
+  --fs-header: clamp(3rem, 1rem + 10vw, 7rem);
+  --clr-header: var(--clr-article-300);
+  --clr-bg: var(--clr-neutral-100);
+
+  /* FONT SIZE */
+  --fs-300: 1rem;
+  --fs-400: 1.125rem;
+  --fs-500: 1.563rem;
+  --fs-600: 1.953rem;
+  --fs-700: 2.441rem;
+  --fs-800: 3.052rem;
+
+  /* NEUTRAL colour */
+  --cc-neutral-100: #fff;
+  --cc-neutral-200: #dedede;
+  --cc-neutral-300: #ccc;
+  --cc-neutral-700: #666;
+  --cc-neutral-800: #4d4d4d;
+  --cc-neutral-900: #262626;
+
+  /* COLOURS */
+  --main: #3041f2;
+  --accent: #bdcdfc;
+  --bg: #ffefd9;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--ff-primary);
+  font-weight: 400;
+  font-size: var(--fs-body);
+  line-height: 1.6;
+}
+
+body,
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--clr-header);
+  font-family: var(--ff-accent);
+  font-weight: 900;
+  line-height: 1;
+  margin-bottom: 1em;
+}
+
+p {
+  margin-bottom: 1em;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ============================
+typography
+===============================*/
+.ff-condensed {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.fs-900 {
+  font-size: 5rem;
+}
+.fs-800 {
+  font-size: 4rem;
+}
+.fs-700 {
+  font-size: 3rem;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.text-centre {
+  text-align: center;
+}
+
+/*
+background 
+*/
+.bg-primary {
+  background-color: var(--bg);
+}
+.bg-light {
+  background-color: var();
+}
+
+header,
+section {
+  padding: 3rem 0;
+  border: 1px red solid;
+  height: 100vh;
+}
+
+@media (min-width: 40em) {
+  header,
+  section {
+    padding: 7rem 0;
+  }
+}
+
+.container {
+  margin: 0 auto;
+  width: min(90%, 70.5rem);
+}
+
+.split {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 40em) {
+  .split {
+    flex-direction: row;
+  }
+  /* for equal columns, all direct children of split */
+  .split > * {
+    flex-basis: 100%;
+  }
+
+  /* adjacent sibling selector, i.e. any element that has a sibling before it */
+  .split > * + * {
+    margin-left: 2em;
+  }
+}
+
+.container--narrow {
+  max-width: 34rem;
+}
+
+section p {
+  font-size: 20pt;
+}
+
+.hidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 2000ms, opacity 2000ms;
+}
+.shown {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s linear 0s, opacity 300ms;
+}
+
+.acknowledgement,
+.acknowledgement a {
+  position: absolute;
+  background-color: var(--main);
+  color: var(--bg);
+}

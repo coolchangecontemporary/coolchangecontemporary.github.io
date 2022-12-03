@@ -1,0 +1,32 @@
+:root {
+  --main: #3041f2;
+  --accent: #bdcdfc;
+  --bg: #ffefd9;
+}
+
+/* text */
+
+h1 {
+  font-size: 25pt;
+  position: sticky;
+  top: 0;
+  font-family: sans-serif;
+}
+
+/* cursors */
+
+a:hover {
+  cursor: grab;
+}
+a {
+  cursor: grab;
+}
+
+button:hover {
+  cursor: grab;
+}
+
+/* main */
+body {
+  background-color: var(--bg);
+}

@@ -15,9 +15,11 @@ function init() {
         $('.acknowledgement').addClass('hidden');
         // 4-4.7s, main body fades in
         setTimeout(() => {
+            // Add the main back to the DOM
             $('main').removeClass('removed');
         }, 3000)
         setTimeout(() => {
+            // Make the main actually visible
             $('main').removeClass('hidden');
         }, 3020);
         // Fully remove the acknowledgement div (for accessibility reasons)

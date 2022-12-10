@@ -72,11 +72,17 @@ p {
 h1,
 h2,
 h3 {
-  color: var(--clr-header);
-  font-family: var(--ff-accent);
-  font-weight: 900;
+  /* color: var(--clr-header);
+  font-family: var(--ff-accent); */
+  /* font-weight: 900; */
   line-height: 1;
   margin-bottom: 1em;
+
+  font-size: 18px;
+  font-weight: 400;
+  font-style: italic;
+
+  color: var(--main);
 }
 
 p {
@@ -167,7 +173,10 @@ section {
 }
 
 section p {
-  font-size: 20pt;
+  font-size: 18px;
+  /* calculate scalable font size  */
+
+  color: var(--main);
 }
 
 .hidden {
@@ -186,8 +195,59 @@ section p {
   position: absolute;
   background-color: var(--main);
   color: var(--bg);
+  display: none;
 }
 
 /* 
 space 
 */
+
+/* about */
+.grid-about {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto;
+  grid-template-areas:
+    "As   .    .    .    .    .    . . . . .  ."
+    ".    .    .    .    .    .    . . . . .  ."
+    ".    Ac   Ac   Ac   Ac   .    . . . . At ."
+    ".    SRt  SRc  SRc  SRc  SRc  . . . . .  ."
+    ".    AIt  AIc  AIc  AIc  AIc  . . . . .  .";
+  /* margin: 20px auto; */
+  font-size: 18px;
+}
+
+.about-space {
+  grid-area: As;
+  /* grid-row: 1 / 4;
+  grid-column: 1 / 4; */
+}
+
+.about-title {
+  grid-area: At;
+  align-items: flex-start;
+}
+.about-content {
+  grid-area: Ac;
+  /* grid-row: 1 / 4;
+  grid-column: 2 / 7; */
+}
+.slow-roll-title {
+  grid-area: SRt;
+}
+.slow-roll {
+  grid-area: SRc;
+}
+.as-is-title {
+  grid-area: AIt;
+}
+/* correct header levels for titles */
+
+.as-is {
+  grid-area: AIc;
+}
+
+.as-is-title,
+.slow-roll-title {
+  font-style: italic;
+}

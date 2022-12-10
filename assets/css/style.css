@@ -144,7 +144,7 @@ background
 }
 
 .main {
-  transition: opacity 700ms linear 3s;
+  transition: opacity 700ms;
 }
 
 /* Acknowledgement */

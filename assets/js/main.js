@@ -14,10 +14,12 @@ function init() {
         // 1.5-3.5s, overlay text fade out
         $('.acknowledgement').addClass('hidden');
         // 4-4.7s, main body fades in
-        $('main').removeClass('removed');
+        setTimeout(() => {
+            $('main').removeClass('removed');
+        }, 3000)
         setTimeout(() => {
             $('main').removeClass('hidden');
-        }, 20);
+        }, 3020);
         // Fully remove the acknowledgement div (for accessibility reasons)
         setTimeout(() => {
             $('.acknowledgement').addClass('removed');

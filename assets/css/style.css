@@ -18,13 +18,19 @@
   --ff-primary: "Arial", sans-serif;
   --ff-accent: Helvetica;
 
-  /* GLOBAL */
-  --fs-body: 1.3125rem;
+  /* body */
+  /* --fs-body: 1.3125rem; */
+  /* --fs-body: 1.125rem; 
+  calculates as 18px*/
+  --fs-body: 1.08rem;
+  --fs-body-small: calc(var(--fs-body) * 0.75);
+  --fs-body-line-height: 1.2;
+
   --clr-body: var(--clr-neutral-800);
 
+  /* header */
   --fs-header: clamp(3rem, 1rem + 10vw, 7rem);
   --clr-header: var(--clr-article-300);
-  --clr-bg: var(--clr-neutral-100);
 
   /* FONT SIZE */
   --fs-300: 1rem;
@@ -45,7 +51,26 @@
   /* COLOURS */
   --main: #3041f2;
   --accent: #bdcdfc;
-  --bg: #ffefd9;
+  --bg-main: #ffefd9;
+  /* --bg-overlay: #3041f2; */
+  --bg-overlay: var(--main);
+}
+
+@font-face {
+  font-family: "Acumin";
+  src: url("/assets/fonts/Acumin/Acumin-Variable-Concept.ttf") format("ttf");
+}
+/* @font-face {
+  font-family: "Acumin";
+  src: url("/assets/fonts/Synt/ABCSynt-Regular-Trial.otf") format("otf");
+} */
+@font-face {
+  font-family: "Synt";
+  src: url("/assets/fonts/Synt/ABCSynt-Regular-Trial.otf") format("otf");
+}
+@font-face {
+  font-family: "Synt-em";
+  src: url("/assets/fonts/Synt/ABCSynt-Italic-Trial.otf") format("otf");
 }
 
 *,
@@ -58,7 +83,8 @@ body {
   font-family: var(--ff-primary);
   font-weight: 400;
   font-size: var(--fs-body);
-  line-height: 1.6;
+
+  line-height: var(--fs-body-line-height);
 }
 
 body,
@@ -97,6 +123,7 @@ img {
 /* ============================
 typography
 ===============================*/
+
 .ff-condensed {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -123,23 +150,20 @@ typography
 background 
 */
 .bg-primary {
-  background-color: var(--bg);
-}
-.bg-light {
-  background-color: var();
+  background-color: var(--bg-main);
 }
 
 header,
 section {
-  padding: 3rem 0;
-  border: 1px red solid;
+  /* padding: 3rem 0; */
+  /* border: 1px red solid; */
   height: 100vh;
 }
 
 @media (min-width: 40em) {
   header,
   section {
-    padding: 7rem 0;
+    /* padding: 7rem 0; */
   }
 }
 
@@ -173,7 +197,7 @@ section {
 }
 
 section p {
-  font-size: 18px;
+  /* font-size: 18px; */
   /* calculate scalable font size  */
 
   color: var(--main);
@@ -190,6 +214,42 @@ section p {
   transition: visibility 0s linear 0s, opacity 300ms;
 }
 
+/* 
+space 
+*/
+
+/* structure skeleton grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto;
+  /* margin: 20px auto; */
+}
+.acknowledgement-content {
+  grid-area: Ack;
+}
+
+.acknowledgement {
+  grid-template-areas:
+    ".    .    .    .    .    .    . . . . . ."
+    ".    .    Ack  Ack  Ack  .    . . . . . .";
+}
+
+.about {
+  grid-template-areas:
+    "As   .    .    .    .    .    . . . . .  ."
+    ".    .    .    .    .    .    . . . . .  ."
+    ".    Ac   Ac   Ac   Ac   .    . . . . At ."
+    ".    SRt  SRc  SRc  SRc  SRc  . . . . .  ."
+    ".    AIt  AIc  AIc  AIc  AIc  . . . . .  .";
+}
+
+/* ========================
+      acknowledgement 
+======================== */
+.acknowledgement {
+}
+
 .acknowledgement,
 .acknowledgement a {
   position: absolute;
@@ -198,39 +258,28 @@ section p {
   display: none;
 }
 
-/* 
-space 
-*/
-
-/* about */
-.grid-about {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: auto;
-  grid-template-areas:
-    "As   .    .    .    .    .    . . . . .  ."
-    ".    .    .    .    .    .    . . . . .  ."
-    ".    Ac   Ac   Ac   Ac   .    . . . . At ."
-    ".    SRt  SRc  SRc  SRc  SRc  . . . . .  ."
-    ".    AIt  AIc  AIc  AIc  AIc  . . . . .  .";
-  /* margin: 20px auto; */
-  font-size: 18px;
+.acknowledgement-accent-text p,
+.acknowledgement-accent-text a {
+  font-size: var(--fs-body-small);
 }
 
-.about-space {
+/* ========================
+      about
+======================== */
+
+.space-about {
   grid-area: As;
+  height: 66.6vh;
   /* grid-row: 1 / 4;
   grid-column: 1 / 4; */
 }
 
 .about-title {
   grid-area: At;
-  align-items: flex-start;
+  /* align-items: flex-start; */
 }
 .about-content {
   grid-area: Ac;
-  /* grid-row: 1 / 4;
-  grid-column: 2 / 7; */
 }
 .slow-roll-title {
   grid-area: SRt;
@@ -241,8 +290,6 @@ space
 .as-is-title {
   grid-area: AIt;
 }
-/* correct header levels for titles */
-
 .as-is {
   grid-area: AIc;
 }
@@ -250,4 +297,25 @@ space
 .as-is-title,
 .slow-roll-title {
   font-style: italic;
+}
+
+/* ========================
+      outlook
+======================== */
+.outlook {
+  margin-top: 1vw;
+  height: 100vh;
+}
+
+.outlook-support {
+  grid-area: Os;
+}
+
+.outlook-bon-marche {
+  grid-area: Obm;
+}
+
+.outlook {
+  grid-template-areas: ". Os Os Os Os . . Obm Obm Obm Obm .";
+  overflow-y: hidden;
 }

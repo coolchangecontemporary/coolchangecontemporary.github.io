@@ -43,9 +43,9 @@
   --cc-neutral-900: #262626;
 
   /* COLOURS */
-  --main: #3041f2;
   --accent: #bdcdfc;
-  --bg: #ffefd9;
+  --bg-main: #ffefd9;
+  --bg-overlay: #3041f2;
 }
 
 *,
@@ -82,7 +82,7 @@ h3 {
   font-weight: 400;
   font-style: italic;
 
-  color: var(--main);
+  color: var(--bg-overlay);
 }
 
 p {
@@ -119,20 +119,54 @@ typography
   text-align: center;
 }
 
+/* Visually hide an element */
+.hidden {
+  opacity: 0;
+}
+
+/* Hide an element plus effectively remove it from the page */
+.removed {
+  display: none;
+}
+
 /*
 background 
 */
 .bg-primary {
-  background-color: var(--bg);
+  background-color: var(--bg-overlay);
+  transition: background-color 3s;
+}
+.bg-primary.bg-other {
+  background-color: var(--bg-main);
 }
 .bg-light {
   background-color: var();
 }
 
+.main {
+  transition: opacity 700ms linear 3s;
+}
+
+/* Acknowledgement */
+.acknowledgement,
+.acknowledgement a {
+  position: absolute;
+  color: var(--bg-main);
+  transition: opacity 2000ms 2000ms;
+}
+
+.acknowledgement p {
+  color: var(--bg-main);
+}
+
+.acknowledgement a {
+  mix-blend-mode: difference;
+}
+
 header,
 section {
   padding: 3rem 0;
-  border: 1px red solid;
+  /* border: 1px red solid; */
   height: 100vh;
 }
 
@@ -176,26 +210,7 @@ section p {
   font-size: 18px;
   /* calculate scalable font size  */
 
-  color: var(--main);
-}
-
-.hidden {
-  visibility: hidden;
-  opacity: 0;
-  transition: visibility 0s linear 2000ms, opacity 2000ms;
-}
-.shown {
-  visibility: visible;
-  opacity: 1;
-  transition: visibility 0s linear 0s, opacity 300ms;
-}
-
-.acknowledgement,
-.acknowledgement a {
-  position: absolute;
-  background-color: var(--main);
-  color: var(--bg);
-  display: none;
+  color: var(--bg-overlay);
 }
 
 /* 

@@ -1,18 +1,11 @@
-$(document).ready(function () {
-    console.log("On course for a Cool Change");
+$(document).ready(init);
 
+function init() {
 
-    $('html').onclick(function (e) {
-        e.preventDefault();
+    // `.one()` unbinds this event listener after its first execution - 
+    // so this code will only execute once
+    // TODO lock the scrollbar until the fadeout is complete
+    $('.overlay').one('click wheel', function () {
         $('.overlay').addClass('hidden');
     });
-
-    function hideOverlay() {
-        $('.overlay').addClass('hidden');
-    }
-
-    $('.overlay').on('click scroll', function () {
-        this.addClass('hidden');
-        this.off('click scroll');
-    });
-});
+}

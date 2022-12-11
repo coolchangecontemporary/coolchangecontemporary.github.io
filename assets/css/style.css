@@ -13,10 +13,29 @@
 * width min() 
 */
 
+@font-face {
+  font-family: Acumin;
+  src: url("/assets/fonts/Acumin/Acumin-Variable-Concept.ttf")
+      format("truetype"),
+    url("/assets/fonts/Acumin/AcuminVariableConcept.otf") format("opentype");
+}
+/* @font-face {
+  font-family: "Acumin";
+  src: url("/assets/fonts/Synt/ABCSynt-Regular-Trial.otf") format("otf");
+} */
+@font-face {
+  font-family: Synt;
+  src: url("/assets/fonts/Synt/ABCSynt-Regular-Trial.otf") format("opentype");
+}
+@font-face {
+  font-family: Synt-em;
+  src: url("/assets/fonts/Synt/ABCSynt-Italic-Trial.otf") format("opentype");
+}
+
 :root {
   /* typography */
-  --ff-primary: "Arial", sans-serif;
-  --ff-accent: Helvetica;
+  --ff-primary: Acumin, "Arial", sans-serif;
+  --ff-accent: Synt-em;
 
   /* body */
   /* --fs-body: 1.3125rem; */
@@ -25,6 +44,7 @@
   --fs-body: 1.08rem;
   --fs-body-small: calc(var(--fs-body) * 0.75);
   --fs-body-line-height: 1.2;
+  --fs-body-line-height: 1.225;
 
   --clr-body: var(--clr-neutral-800);
 
@@ -52,23 +72,10 @@
   --accent: #bdcdfc;
   --bg-main: #ffefd9;
   --bg-overlay: #3041f2;
-}
 
-@font-face {
-  font-family: "Acumin";
-  src: url("/assets/fonts/Acumin/Acumin-Variable-Concept.ttf") format("ttf");
-}
-/* @font-face {
-  font-family: "Acumin";
-  src: url("/assets/fonts/Synt/ABCSynt-Regular-Trial.otf") format("otf");
-} */
-@font-face {
-  font-family: "Synt";
-  src: url("/assets/fonts/Synt/ABCSynt-Regular-Trial.otf") format("otf");
-}
-@font-face {
-  font-family: "Synt-em";
-  src: url("/assets/fonts/Synt/ABCSynt-Italic-Trial.otf") format("otf");
+  /* general */
+  --one-twelth-vw: calc(100vw / 12);
+  --oneohhalf-twelth-vw: calc((100vw / 12) * 0.5);
 }
 
 *,
@@ -79,10 +86,12 @@
 
 body {
   font-family: var(--ff-primary);
-  font-weight: 400;
+  font-weight: 300;
   font-size: var(--fs-body);
-
   line-height: var(--fs-body-line-height);
+
+  /* for mobile padding */
+  /* padding: 0 1em; */
 }
 
 body,
@@ -96,21 +105,31 @@ p {
 h1,
 h2,
 h3 {
-  /* color: var(--clr-header);
-  font-family: var(--ff-accent); */
-  /* font-weight: 900; */
+  font-size: var(--fs-body);
+
+  font-family: var(--ff-accent);
   line-height: 1;
   margin-bottom: 1em;
-
-  font-size: 18px;
-  font-weight: 400;
-  font-style: italic;
+  font-weight: 300;
+  /* font-style: italic; */
 
   color: var(--bg-overlay);
 }
 
 p {
+  /* last paragraph of each div is margin 0 */
   margin-bottom: 1em;
+
+  color: var(--bg-overlay);
+}
+p.last-p {
+  margin-bottom: 0;
+}
+
+h2,
+h3,
+em {
+  font-family: Synt;
 }
 
 img {
@@ -171,6 +190,13 @@ typography
 
 .main {
   transition: opacity 700ms;
+  /* display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "acknowledgement-section"
+    "about-section"
+    "outlook-section"; */
 }
 
 .acknowledgement p {
@@ -181,54 +207,9 @@ typography
   mix-blend-mode: difference;
 }
 
-header,
-section {
-  /* padding: 3rem 0; */
-  /* border: 1px red solid; */
-  height: 100vh;
-}
-
-@media (min-width: 40em) {
-  header,
-  section {
-    /* padding: 7rem 0; */
-  }
-}
-
 .container {
   margin: 0 auto;
   width: min(90%, 70.5rem);
-}
-
-.split {
-  display: flex;
-  flex-direction: column;
-}
-
-@media (min-width: 40em) {
-  .split {
-    flex-direction: row;
-  }
-  /* for equal columns, all direct children of split */
-  .split > * {
-    flex-basis: 100%;
-  }
-
-  /* adjacent sibling selector, i.e. any element that has a sibling before it */
-  .split > * + * {
-    margin-left: 2em;
-  }
-}
-
-.container--narrow {
-  max-width: 34rem;
-}
-
-section p {
-  /* font-size: 18px; */
-  /* calculate scalable font size  */
-
-  color: var(--bg-overlay);
 }
 
 /* ========================
@@ -236,7 +217,7 @@ section p {
 ======================== */
 
 .grid {
-  display: inline-grid;
+  display: grid;
   display: -ms-inline-grid;
   display: -moz-inline-grid;
   grid-template-columns: repeat(12, 1fr);
@@ -254,14 +235,16 @@ section p {
 }
 
 .acknowledgement {
+  /* grid-area: acknowledgement-section; */
   grid-template-areas:
     ".    .    .    .    .    .    . . . . . ."
     ".    .    Ack  Ack  Ack  .    . . . . . .";
 }
 
 .about {
+  grid-area: about-section;
   grid-template-areas:
-    "As   .    .    .    .    .    . . . . .  ."
+    ".    header   .    .    .    .    . . . . .  ."
     ".    .    .    .    .    .    . . . . .  ."
     ".    Ac   Ac   Ac   Ac   .    . . . . At ."
     ".    SRt  SRc  SRc  SRc  SRc  . . . . .  ."
@@ -269,12 +252,12 @@ section p {
 }
 
 .outlook {
+  grid-area: outlook-section;
   grid-template-areas: ". Os Os Os Os . . Obm Obm Obm Obm .";
   /* overflow-y: hidden; */
 }
-
-.footer {
-  grid-template-areas: ".   socials    .    address    address    .    . . . cc cc  .";
+.outlook-container {
+  display: block;
 }
 
 /* ========================
@@ -297,11 +280,12 @@ section p {
       about
 ======================== */
 
-.space-about {
-  grid-area: As;
+.header {
+  display: grid;
+  grid-area: header;
   height: 66.6vh;
-  /* grid-row: 1 / 4;
-  grid-column: 1 / 4; */
+  grid-row: 1 / 4;
+  grid-column: 1 / 4;
 }
 
 .about-title {
@@ -333,8 +317,13 @@ section p {
       outlook
 ======================== */
 .outlook {
-  margin-top: 1vw;
-  height: 100vh;
+  /* space above outlook section 
+     1/12 vw */
+  margin-top: var(--one-twelth-vw);
+
+  /* space below outlook section 
+     0.5/12 vw */
+  margin-bottom: var(--oneohhalf-twelth-vw);
 }
 
 .outlook-support {
@@ -345,12 +334,50 @@ section p {
   grid-area: Obm;
 }
 
+.outlook {
+  /* 
+  review: 
+      clamp(MIN, VAL, MAX) resolves to max(MIN, min(VAL, MAX)) 
+  */
+
+  /* height of outlook img to fill screen height */
+  max-height: 100vh;
+
+  /* height of outlook img to not surpass X px */
+  /* max-height: 300px; */
+}
+
+.outlook img {
+  width: 100%;
+}
+
 /* ========================
       footer
 ======================== */
+
+.footer {
+  display: grid;
+  grid-template-areas: ".   contact    .    address    address    .    . . . cc-ip cc-ip  .";
+}
+
 .social-icon {
   mix-blend-mode: normal;
   width: 20px;
+}
+
+.contact {
+  grid-area: contact;
+}
+
+.address {
+  grid-area: address;
+}
+.address p {
+  margin-bottom: 0;
+}
+
+.cc-ip {
+  grid-area: cc-ip;
 }
 
 .icon-ig {
@@ -359,3 +386,22 @@ section p {
 }
 .icon-email {
 }
+
+/* ========================
+      media queries
+======================== */
+@media (max-width: 40em) {
+  .footer {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "contact"
+      "address"
+      "cc-ip";
+
+    /* review:
+          - add grid gap between sections */
+  }
+}
+/* ========================
+      updates
+======================== */

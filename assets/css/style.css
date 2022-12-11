@@ -69,6 +69,8 @@
   --accent: #bdcdfc;
   --bg-main: #ffefd9;
   --bg-overlay: #3041f2;
+  --bg-ribbon: #D3FF75;
+  --fc-ribbon: #FF6915;
 }
 
 *,
@@ -336,4 +338,36 @@ space
 .outlook {
   grid-template-areas: ". Os Os Os Os . . Obm Obm Obm Obm .";
   overflow-y: hidden;
+}
+
+/* ========================
+    'under construction'
+======================== */
+.ribbon {
+  background: var(--bg-ribbon);
+  color: var(--fc-ribbon);
+  padding: 1em 0;
+  position: fixed;
+  right: 0;
+  transform: translateX(40%) translateY(0%) rotate(45deg);
+  white-space: nowrap;
+  /* z-index: 2; */
+}
+.ribbon-text {
+  font-family: "Acumin";
+  /* TODO: How do I access the ExtraCondensed Bold font style? */
+  transform: translateX(40%);
+  animation: scroll-animation 15s linear infinite;
+}
+@keyframes scroll-animation {
+  from {
+    -moz-transform: translateX(40%);
+    -webkit-transform: translateX(40%);
+    transform: translateX(40%);
+  }
+  to {
+    -moz-transform: translateX(-10%);
+    -webkit-transform: translateX(-10%);
+    transform: translateX(-10%);
+  }
 }

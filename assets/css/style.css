@@ -245,7 +245,7 @@ space
 .grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: auto;
+  grid-template-rows: repeat(3, 1fr);
   /* margin: 20px auto; */
 }
 .acknowledgement-content {
@@ -255,7 +255,8 @@ space
 .acknowledgement {
   grid-template-areas:
     ".    .    .    .    .    .    . . . . . ."
-    ".    .    Ack  Ack  Ack  .    . . . . . .";
+    ".    .    Ack  Ack  Ack  .    . . . . . ."
+    ".    .    .    .    .    .    . . . . . .";
 }
 
 .about {

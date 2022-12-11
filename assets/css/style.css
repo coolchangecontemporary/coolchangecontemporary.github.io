@@ -145,27 +145,28 @@ typography
 }
 
 /* Visually hide an element */
-.hidden {
+/*                  uncomment */
+/* .hidden {
   opacity: 0;
-}
+} */
 
 /* Hide an element plus effectively remove it from the page */
-.removed {
+/*                  uncomment */
+/* .removed {
   display: none;
-}
+} */
 
-/*
-background 
-*/
-.bg-primary {
+/* ========================
+      background
+======================== */
+
+/*                  uncomment */
+/* .bg-primary {
   background-color: var(--bg-overlay);
   transition: background-color 3s;
-}
+} */
 .bg-primary.bg-other {
   background-color: var(--bg-main);
-}
-.bg-light {
-  background-color: var();
 }
 
 .main {
@@ -230,17 +231,24 @@ section p {
   color: var(--bg-overlay);
 }
 
-/* 
-space 
-*/
+/* ========================
+      grid layout 
+======================== */
 
-/* structure skeleton grid */
 .grid {
-  display: grid;
+  display: inline-grid;
+  display: -ms-inline-grid;
+  display: -moz-inline-grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: auto;
   /* margin: 20px auto; */
 }
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+
 .acknowledgement-content {
   grid-area: Ack;
 }
@@ -258,6 +266,15 @@ space
     ".    Ac   Ac   Ac   Ac   .    . . . . At ."
     ".    SRt  SRc  SRc  SRc  SRc  . . . . .  ."
     ".    AIt  AIc  AIc  AIc  AIc  . . . . .  .";
+}
+
+.outlook {
+  grid-template-areas: ". Os Os Os Os . . Obm Obm Obm Obm .";
+  /* overflow-y: hidden; */
+}
+
+.footer {
+  grid-template-areas: ".   socials    .    address    address    .    . . . cc cc  .";
 }
 
 /* ========================
@@ -328,7 +345,17 @@ space
   grid-area: Obm;
 }
 
-.outlook {
-  grid-template-areas: ". Os Os Os Os . . Obm Obm Obm Obm .";
-  overflow-y: hidden;
+/* ========================
+      footer
+======================== */
+.social-icon {
+  mix-blend-mode: normal;
+  width: 20px;
+}
+
+.icon-ig {
+}
+.icon-fb {
+}
+.icon-email {
 }

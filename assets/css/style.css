@@ -176,7 +176,7 @@ background
 }
 
 .main {
-  transition: opacity 700ms;
+  transition: opacity 1s;
 }
 
 .acknowledgement p {
@@ -352,6 +352,7 @@ space
   right: 0;
   transform: translateX(40%) translateY(0%) rotate(45deg);
   white-space: nowrap;
+  transition: opacity 2s;
   /* z-index: 2; */
 }
 .ribbon-text {

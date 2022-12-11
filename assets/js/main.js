@@ -9,21 +9,30 @@ function init() {
         if (e.type !== 'click') {
             e.preventDefault();
         } 
-        // bg color transition 0-3s
+        // Transition background colour
         $('.bg-primary').addClass('bg-other');
-        // 1.5-3.5s, overlay text fade out
+
+        // Hide acknowledgement
         $('.acknowledgement').addClass('hidden');
-        // 4-4.7s, main body fades in
+
+        // Add the ribbon
+        $('.ribbon').removeClass('removed');
+        // Begin ribbon fadein after a delay
         setTimeout(() => {
-            // Add the main back to the DOM
+            $('.ribbon').removeClass('hidden');
+        }, 1520);
+
+        // Add the main back to the DOM
+        setTimeout(() => {
             $('main').removeClass('removed');
-        }, 3000)
+        }, 3000);
         setTimeout(() => {
             // Make the main actually visible - this must be slightly delayed
             // (by 'a handful of milliseconds' according to MDN) otherwise it won't apply
             $('main').removeClass('hidden');
         }, 3020);
-        // Fully remove the acknowledgement div (for accessibility reasons)
+        
+        // Fully remove the acknowledgement div after fadeout complete (for accessibility reasons)
         setTimeout(() => {
             $('.acknowledgement').addClass('removed');
         }, 5000);

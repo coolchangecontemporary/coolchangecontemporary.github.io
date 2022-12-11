@@ -23,7 +23,7 @@
 } */
 @font-face {
   font-family: "Synt";
-  src: url("assets/fonts/Synt/ABCSynt-Regular-Trial.otf") format("opentype");
+  src: url("/assets/fonts/Synt/ABCSynt-Regular-Trial.otf") format("opentype");
 }
 @font-face {
   font-family: "Synt-em";

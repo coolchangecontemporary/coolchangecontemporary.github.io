@@ -32,8 +32,8 @@
 
 :root {
   /* typography */
-  --ff-primary: "Arial", sans-serif;
-  --ff-accent: Helvetica;
+  --ff-primary: "Acumin";
+  --ff-accent: "Synt";
 
   /* body */
   /* --fs-body: 1.3125rem; */
@@ -97,8 +97,8 @@ h1,
 h2,
 h3 {
   /* color: var(--clr-header);
-  font-family: var(--ff-accent); */
   /* font-weight: 900; */
+  font-family: var(--ff-accent);
   line-height: 1;
   margin-bottom: 1em;
 
@@ -107,6 +107,11 @@ h3 {
   font-style: italic;
 
   color: var(--bg-overlay);
+}
+
+em {
+  font-family: var(--ff-accent);
+  font-weight: 600;
 }
 
 p {
@@ -151,7 +156,7 @@ typography
 
 /* Hide an element plus effectively remove it from the page */
 .removed {
-  display: none;
+  display: none !important;
 }
 
 /*

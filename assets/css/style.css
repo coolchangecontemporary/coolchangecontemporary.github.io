@@ -13,6 +13,23 @@
 * width min() 
 */
 
+@font-face {
+  font-family: "Acumin";
+  src: url("/assets/fonts/Acumin/Acumin-Variable-Concept.ttf") format("truetype");
+}
+/* @font-face {
+  font-family: "Acumin";
+  src: url("/assets/fonts/Synt/ABCSynt-Regular-Trial.otf") format("otf");
+} */
+@font-face {
+  font-family: "Synt";
+  src: url("assets/fonts/Synt/ABCSynt-Regular-Trial.otf") format("opentype");
+}
+@font-face {
+  font-family: "Synt-em";
+  src: url("/assets/fonts/Synt/ABCSynt-Italic-Trial.otf") format("opentype");
+}
+
 :root {
   /* typography */
   --ff-primary: "Arial", sans-serif;
@@ -52,23 +69,6 @@
   --accent: #bdcdfc;
   --bg-main: #ffefd9;
   --bg-overlay: #3041f2;
-}
-
-@font-face {
-  font-family: "Acumin";
-  src: url("/assets/fonts/Acumin/Acumin-Variable-Concept.ttf") format("ttf");
-}
-/* @font-face {
-  font-family: "Acumin";
-  src: url("/assets/fonts/Synt/ABCSynt-Regular-Trial.otf") format("otf");
-} */
-@font-face {
-  font-family: "Synt";
-  src: url("/assets/fonts/Synt/ABCSynt-Regular-Trial.otf") format("otf");
-}
-@font-face {
-  font-family: "Synt-em";
-  src: url("/assets/fonts/Synt/ABCSynt-Italic-Trial.otf") format("otf");
 }
 
 *,

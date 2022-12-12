@@ -22,6 +22,13 @@ function init() {
             $('.ribbon').removeClass('hidden');
         }, 1520);
 
+        // Add the ribbon
+        $('.header-logo').removeClass('removed');
+        // Begin ribbon fadein after a delay
+        setTimeout(() => {
+            $('.header-logo').removeClass('hidden');
+        }, 1520);
+
         // Add the main back to the DOM
         setTimeout(() => {
             $('main').removeClass('removed');

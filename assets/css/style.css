@@ -302,6 +302,7 @@ typography
   grid-area: head;
   display: flex;
   align-items: center;
+  transition: opacity 2000ms;
 }
 .header-logo img {
   /* https://web.dev/min-max-clamp/#clamp */

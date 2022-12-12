@@ -192,7 +192,6 @@ typography
 }
 
 /* Visually hide an element */
-/*                  uncomment */
 .hidden {
   opacity: 0;
 }
@@ -207,10 +206,10 @@ typography
 ======================== */
 
 /*                  uncomment */
-/* .bg-primary {
+.bg-primary {
   background-color: var(--bg-overlay);
   transition: background-color 3s;
-} */
+}
 .bg-primary.bg-other {
   background-color: var(--bg-main);
 }
@@ -445,6 +444,7 @@ typography
   display: grid;
   grid-template-areas: ".   contact    .    address    address    .    . . . cc-ip cc-ip  .";
   min-height: var(--one-twelth-vw);
+  transition: opacity 2000ms;
 }
 
 .social-icon {

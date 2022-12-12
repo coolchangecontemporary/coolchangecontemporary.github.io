@@ -32,6 +32,15 @@ function init() {
             $('main').removeClass('hidden');
         }, 3020);
         
+        setTimeout(() => {
+            $('footer').removeClass('removed');
+        }, 3000);
+        setTimeout(() => {
+            // Make the main actually visible - this must be slightly delayed
+            // (by 'a handful of milliseconds' according to MDN) otherwise it won't apply
+            $('footer').removeClass('hidden');
+        }, 3020);
+        
         // Fully remove the acknowledgement div after fadeout complete (for accessibility reasons)
         setTimeout(() => {
             $('.acknowledgement').addClass('removed');

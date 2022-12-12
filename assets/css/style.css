@@ -14,26 +14,28 @@
 */
 
 @font-face {
-  font-family: "Acumin";
-  src: url("/assets/fonts/Acumin/Acumin-Variable-Concept.ttf") format("truetype");
+  font-family: Acumin;
+  src: url("/assets/fonts/Acumin/Acumin-Variable-Concept.ttf")
+      format("truetype"),
+    url("/assets/fonts/Acumin/AcuminVariableConcept.otf") format("opentype");
 }
 /* @font-face {
   font-family: "Acumin";
   src: url("/assets/fonts/Synt/ABCSynt-Regular-Trial.otf") format("otf");
 } */
 @font-face {
-  font-family: "Synt";
+  font-family: Synt;
   src: url("/assets/fonts/Synt/ABCSynt-Regular-Trial.otf") format("opentype");
 }
 @font-face {
-  font-family: "Synt-em";
+  font-family: Synt-em;
   src: url("/assets/fonts/Synt/ABCSynt-Italic-Trial.otf") format("opentype");
 }
 
 :root {
   /* typography */
-  --ff-primary: "Acumin";
-  --ff-accent: "Synt";
+  --ff-primary: Acumin, "Arial", sans-serif;
+  --ff-accent: Synt-em;
 
   /* body */
   /* --fs-body: 1.3125rem; */
@@ -42,6 +44,7 @@
   --fs-body: 1.08rem;
   --fs-body-small: calc(var(--fs-body) * 0.75);
   --fs-body-line-height: 1.2;
+  --fs-body-line-height: 1.225;
 
   --clr-body: var(--clr-neutral-800);
 
@@ -71,6 +74,13 @@
   --bg-overlay: #3041f2;
   --bg-ribbon: #D3FF75;
   --fc-ribbon: #FF6915;
+  --bg-difference: #cfbe0d;
+  --bg-difference-navy: #001026;
+
+  /* general */
+  --one-twelth-vw: calc(100vw / 12);
+  --oneohhalf-twelth-vw: calc((100vw / 12) * 0.5);
+  --one-twelth-custom-vw: calc(100vw / 9);
 }
 
 *,
@@ -81,10 +91,12 @@
 
 body {
   font-family: var(--ff-primary);
-  font-weight: 400;
+  font-weight: 300;
   font-size: var(--fs-body);
-
   line-height: var(--fs-body-line-height);
+
+  /* for mobile padding */
+  /* padding: 0 1em; */
 }
 
 body,
@@ -98,14 +110,11 @@ p {
 h1,
 h2,
 h3 {
-  /* color: var(--clr-header);
-  /* font-weight: 900; */
+  font-size: var(--fs-body);
   font-family: var(--ff-accent);
   line-height: 1;
   margin-bottom: 1em;
-
-  font-size: 18px;
-  font-weight: 400;
+  font-weight: 300;
   font-style: italic;
 
   color: var(--bg-overlay);
@@ -118,6 +127,37 @@ em {
 
 p {
   margin-bottom: 1em;
+  color: var(--bg-overlay);
+}
+p.last-p {
+  /* set last paragraph of each section to margin 0 */
+  margin-bottom: 0;
+}
+.acknowledgement p {
+  color: var(--bg-main);
+}
+.acknowledgement-accent-text {
+  font-size: smaller;
+  line-height: 1;
+}
+
+.acknowledgement p .acknowledgement-link {
+  background-color: var(--bg-difference);
+  color: var(--bg-difference-navy);
+  text-decoration: none;
+  transition: color 700ms, background-color 700ms;
+}
+.acknowledgement p .acknowledgement-link:hover,
+.acknowledgement p .acknowledgement-link:focus {
+  color: var(--bg-main);
+  color: var(--bg-overlay);
+  background-color: var(--bg-main);
+}
+
+h2,
+h3,
+em {
+  font-family: Synt;
 }
 
 img {
@@ -152,6 +192,7 @@ typography
 }
 
 /* Visually hide an element */
+/*                  uncomment */
 .hidden {
   opacity: 0;
 }
@@ -161,104 +202,45 @@ typography
   display: none !important;
 }
 
-/*
-background 
-*/
-.bg-primary {
+/* ========================
+      background
+======================== */
+
+/*                  uncomment */
+/* .bg-primary {
   background-color: var(--bg-overlay);
   transition: background-color 3s;
-}
+} */
 .bg-primary.bg-other {
   background-color: var(--bg-main);
-}
-.bg-light {
-  background-color: var();
 }
 
 .main {
   transition: opacity 1s;
 }
 
-.acknowledgement p {
-  color: var(--bg-main);
-}
-
+/* 
 .acknowledgement a {
   mix-blend-mode: difference;
-}
-
-header,
-section {
-  /* padding: 3rem 0; */
-  /* border: 1px red solid; */
-  height: 100vh;
-}
-
-@media (min-width: 40em) {
-  header,
-  section {
-    /* padding: 7rem 0; */
-  }
-}
+} */
 
 .container {
   margin: 0 auto;
   width: min(90%, 70.5rem);
 }
 
-.split {
-  display: flex;
-  flex-direction: column;
-}
+/* ========================
+      grid init 
+======================== */
 
-@media (min-width: 40em) {
-  .split {
-    flex-direction: row;
-  }
-  /* for equal columns, all direct children of split */
-  .split > * {
-    flex-basis: 100%;
-  }
-
-  /* adjacent sibling selector, i.e. any element that has a sibling before it */
-  .split > * + * {
-    margin-left: 2em;
-  }
-}
-
-.container--narrow {
-  max-width: 34rem;
-}
-
-section p {
-  /* font-size: 18px; */
-  /* calculate scalable font size  */
-
-  color: var(--bg-overlay);
-}
-
-/* 
-space 
-*/
-
-/* structure skeleton grid */
 .grid {
   display: grid;
+  display: -ms-inline-grid;
+  display: -moz-inline-grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: repeat(3, 1fr);
   /* margin: 20px auto; */
 }
-.acknowledgement-content {
-  grid-area: Ack;
-}
-
-.acknowledgement {
-  grid-template-areas:
-    ".    .    .    .    .    .    . . . . . ."
-    ".    .    Ack  Ack  Ack  .    . . . . . ."
-    ".    .    .    .    .    .    . . . . . .";
-}
-
 .about {
   grid-template-areas:
     "As   .    .    .    .    .    . . . . .  ."
@@ -271,6 +253,20 @@ space
 /* ========================
       acknowledgement 
 ======================== */
+
+.acknowledgement-content {
+  grid-area: Ack;
+}
+
+.acknowledgement {
+  /* grid-area: acknowledgement-section; */
+  grid-template-areas:
+    ".    .    .    .    .    .    . . . . . ."
+    ".    .    Ack  Ack  Ack  .    . . . . . .";
+
+  /* is this the best way to fix height? */
+  height: 100vh;
+}
 
 .acknowledgement,
 .acknowledgement a {
@@ -285,19 +281,47 @@ space
 }
 
 /* ========================
+      header
+======================== */
+
+.header {
+  grid-template-areas:
+    ".    .    .    .    .    .    . . . . . ."
+    ".    head .    .    .    .    . . . . . .";
+  height: 66.6vh;
+  justify-content: center;
+  justify-items: center;
+
+  /* grid-row: 1 / 4;
+  grid-column: 1 / 4; */
+}
+.header-logo {
+  grid-area: head;
+}
+.header-logo img {
+  /* https://web.dev/min-max-clamp/#clamp */
+  width: clamp(350px, 100%, 120%);
+  width: max(150px, 120%);
+  max-width: none;
+}
+
+/* ========================
       about
 ======================== */
 
-.space-about {
-  grid-area: As;
-  height: 66.6vh;
-  /* grid-row: 1 / 4;
-  grid-column: 1 / 4; */
+.about {
+  grid-area: about-section;
+  grid-template-areas:
+    ".    head .    .    .    .    . . . . .  ."
+    ".    .    .    .    .    .    . . . . .  ."
+    ".    Ac   Ac   Ac   Ac   .    . . . . At ."
+    ".    SRt  SRc  SRc  SRc  SRc  . . . . .  ."
+    ".    AIt  AIc  AIc  AIc  AIc  . . . . .  .";
 }
 
 .about-title {
   grid-area: At;
-  /* align-items: flex-start; */
+  text-align: end;
 }
 .about-content {
   grid-area: Ac;
@@ -324,21 +348,259 @@ space
       outlook
 ======================== */
 .outlook {
-  margin-top: 1vw;
-  height: 100vh;
+  grid-area: outlook-section;
+  grid-template-areas: ". Os Os Os Os . . Obm Obm Obm Obm .";
+
+  /* space above outlook section 
+     1/12 vw */
+  margin-top: var(--one-twelth-vw);
+
+  /* space below outlook section 
+     0.5/12 vw */
+  margin-bottom: var(--oneohhalf-twelth-vw);
+
+  /* 
+  review: 
+      clamp(MIN, VAL, MAX) resolves to max(MIN, min(VAL, MAX)) 
+  */
+
+  /* height of outlook img to fill screen height */
+  max-width: 100vw;
+
+  /* height of outlook img to not surpass X px */
+  /* max-height: 300px; */
 }
 
 .outlook-support {
   grid-area: Os;
 }
 
+/* #outlook-book::before {
+  content: url(/content/img/Icons/CTA_Book.svg);
+  width: var(--one-twelth-custom-vw);
+  height: 200px;
+  position: absolute;
+  z-index: -1;
+} */
+
+#outlook-book-container,
+#outlook-door-container {
+  position: relative;
+}
+
+#outlook-book svg:hover {
+  fill: #fce57e;
+}
+
+#outlook-book svg {
+  mix-blend-mode: difference;
+}
+/* Book text hover */
+#outlook-book svg:hover path.cls-1,
+#outlook-book svg:focus path.cls-1 {
+  fill: green;
+}
+/* Book urchin hover */
+#outlook-book svg:hover path.cls-1,
+#outlook-book svg:focus path.cls-1 {
+  fill: red;
+}
+
+.icon-container-CTA-book,
+.icon-container-CTA-door {
+  position: absolute;
+  z-index: 9;
+  mix-blend-mode: difference;
+}
+.icon-container-CTA-book {
+  width: var(--one-twelth-custom-vw);
+  height: auto;
+  top: 0;
+  left: 0;
+}
+.icon-container-CTA-door {
+  width: var(--one-twelth-custom-vw);
+  height: auto;
+  bottom: 0;
+  right: 0;
+
+  /* Task:
+  - realign with margin: 0 auto 
+  - */
+}
+
 .outlook-bon-marche {
   grid-area: Obm;
 }
 
+.outlook img {
+  width: 100%;
+}
+
+/* ========================
+      footer
+======================== */
+
+.footer {
+  display: grid;
+  grid-template-areas: ".   contact    .    address    address    .    . . . cc-ip cc-ip  .";
+  min-height: var(--one-twelth-vw);
+}
+
+.social-icon {
+  mix-blend-mode: normal;
+
+  /* review:
+        - not fixed width
+  */
+  width: 1.5em;
+}
+
+.contact {
+  grid-area: contact;
+}
+.footer .contact .contact-icons {
+  display: flex;
+  justify-content: center;
+  justify-content: space-around;
+  align-content: center;
+  /* gap: 2px;
+  grid-auto-flow: column; */
+}
+
+.address {
+  grid-area: address;
+}
+.address p {
+  margin-bottom: 0;
+}
+
+.cc-ip {
+  grid-area: cc-ip;
+  display: grid;
+  /* centering content */
+  justify-content: center;
+  align-content: center;
+}
+.cc-ip p {
+  margin-bottom: 0;
+}
+
+/* 
+.icon-ig {
+}
+.icon-fb {
+}
+.icon-email {
+} */
+
+/* ========================
+      media queries
+======================== */
+
+/* 576px */
+@media (max-width: 40em) {
+  body {
+    padding: 2em;
+  }
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .acknowledgement {
+    /* grid-area: acknowledgement-section; */
+    grid-template-areas: "Ack  Ack  Ack";
+  }
+  .header {
+    grid-template-areas: "head ";
+  }
+  .about-title {
+    display: none;
+  }
+  .about {
+    grid-template-areas:
+      "Ac   Ac   Ac"
+      "SRt  SRc  SRc"
+      "AIt  AIc  AIc";
+  }
+
+  .outlook {
+    grid-template-areas:
+      "Os  Os  Os"
+      "Obm Obm Obm";
+    padding: 2em;
+    row-gap: 100px;
+  }
+  .footer {
+    grid-template-columns: 2fr;
+    grid-template-areas:
+      "contact address"
+      "cc-ip cc-ip";
+    /* review:
+          - add grid gap between sections */
+  }
+  .footer > div {
+    padding-bottom: 2em;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    text-align: end;
+  }
+
+  .footer .contact .contact-icons {
+    display: flex;
+    justify-content: center;
+    justify-content: space-around;
+    align-content: center;
+    text-align: end;
+    /* gap: 2px;
+    grid-auto-flow: column; */
+  }
+}
+/* ========================
+      temp. updates
+======================== */
+
+/* body {
+  background-color: var(--bg-overlay);
+  background-color: var(--bg-main);
+}
+.acknowledgement {
+  visibility: hidden;
+} */
+.acknowledgement p {
+  color: var(--bg-main);
+  /* width: clamp(30ch, 50%, 75ch); */
+}
+
+/* ========================
+      updates to commit
+======================== */
+
 .outlook {
-  grid-template-areas: ". Os Os Os Os . . Obm Obm Obm Obm .";
-  overflow-y: hidden;
+  grid-area: outlook-section;
+  grid-template-areas:
+    ". Os-book Os-book .  .  . . .   .   .   .   ."
+    ". Os      Os      Os Os . . Obm Obm Obm Obm ."
+    ". .       .       .  .  . . .   .   .   .   .";
+
+  /* space above outlook section 
+     1/12 vw */
+  margin-top: var(--one-twelth-vw);
+
+  /* space below outlook section 
+     0.5/12 vw */
+  margin-bottom: var(--oneohhalf-twelth-vw);
+
+  /* 
+  review: 
+      clamp(MIN, VAL, MAX) resolves to max(MIN, min(VAL, MAX)) 
+  */
+
+  /* height of outlook img to fill screen height */
+  max-width: 100vw;
+
+  /* height of outlook img to not surpass X px */
+  /* max-height: 300px; */
 }
 
 /* ========================

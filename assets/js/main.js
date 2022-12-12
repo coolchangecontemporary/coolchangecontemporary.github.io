@@ -4,7 +4,7 @@ function init() {
 
     // `.one()` unbinds this event listener after its first execution - 
     // so this code will only execute once
-    $(document).one('click wheel keydown', function (e) {
+    $(document).one('click wheel keydown touchmove', function (e) {
         // Allow the link on the overlay to be clicked
         if (e.type !== 'click') {
             e.preventDefault();

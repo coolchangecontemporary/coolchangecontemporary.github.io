@@ -146,6 +146,7 @@ p.last-p {
   color: var(--bg-difference-navy);
   text-decoration: none;
   transition: color 700ms, background-color 700ms;
+  transition: opacity 3000ms;
 }
 .acknowledgement p .acknowledgement-link:hover,
 .acknowledgement p .acknowledgement-link:focus {
@@ -239,10 +240,10 @@ typography
   grid-template-columns: repeat(12, 1fr);
   /* margin: 20px auto; */
 }
-/* .grid.acknowledgement,
+.grid.acknowledgement,
 .grid.header {
   grid-template-rows: repeat(3, 1fr);
-} */
+}
 .about {
   grid-template-areas:
     "As   .    .    .    .    .    . . . . .  ."
@@ -264,19 +265,11 @@ typography
   /* grid-area: acknowledgement-section; */
   grid-template-areas:
     ".    .    .    .    .    .    . . . . . ."
-    ".    .    Ack  Ack  Ack  .    . . . . . .";
+    ".    .    Ack  Ack  Ack  .    . . . . . ."
+    ".    .    .    .    .    .    . . . . . .";
 
   /* is this the best way to fix height? */
   /* height: 100vh; */
-}
-.acknowledgement {
-  grid-template-areas:
-    ".    .    .    .    .    .    . . . . . ."
-    ".    .    Ack  Ack  Ack  .    . . . . . .";
-  height: 66.6vh;
-  justify-content: center;
-  justify-items: center;
-  margin: 0 auto;
 }
 .acknowledgement,
 .acknowledgement a {

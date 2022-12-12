@@ -11,6 +11,7 @@ function init() {
         }
         // Transition background colour
         $('.bg-primary').addClass('bg-other');
+        $('.acknowledgement-link').addClass('hidden');
 
         // Hide acknowledgement
         $('.acknowledgement').addClass('hidden');

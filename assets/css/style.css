@@ -72,14 +72,15 @@
   --accent: #bdcdfc;
   --bg-main: #ffefd9;
   --bg-overlay: #3041f2;
-  --bg-ribbon: #D3FF75;
-  --fc-ribbon: #FF6915;
+  --bg-ribbon: #d3ff75;
+  --fc-ribbon: #ff6915;
   --bg-difference: #cfbe0d;
   --bg-difference-navy: #001026;
 
   /* general */
   --one-twelth-vw: calc(100vw / 12);
-  --oneohhalf-twelth-vw: calc((100vw / 12) * 0.5);
+  --one-eighth-vw: calc(100vw / 8);
+  --one-twentyfourth-vw: calc(100vw / 24);
   --one-twelth-custom-vw: calc(100vw / 9);
 }
 
@@ -122,7 +123,6 @@ h3 {
 
 em {
   font-family: var(--ff-accent);
-  font-weight: 600;
 }
 
 p {
@@ -237,8 +237,11 @@ typography
   display: -ms-inline-grid;
   display: -moz-inline-grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(3, 1fr);
   /* margin: 20px auto; */
+}
+.grid.acknowledgement,
+.grid.header {
+  grid-template-rows: repeat(3, 1fr);
 }
 .about {
   grid-template-areas:
@@ -264,7 +267,7 @@ typography
     ".    .    Ack  Ack  Ack  .    . . . . . .";
 
   /* is this the best way to fix height? */
-  height: 100vh;
+  /* height: 100vh; */
 }
 
 .acknowledgement,
@@ -290,18 +293,21 @@ typography
   height: 66.6vh;
   justify-content: center;
   justify-items: center;
+  margin: 0 auto;
 
   /* grid-row: 1 / 4;
   grid-column: 1 / 4; */
 }
 .header-logo {
   grid-area: head;
+  display: flex;
+  align-items: center;
 }
 .header-logo img {
   /* https://web.dev/min-max-clamp/#clamp */
-  width: clamp(350px, 100%, 120%);
-  width: max(150px, 120%);
-  max-width: none;
+  /* width: clamp(350px, 100%, 120%); */
+  width: max(150px, 100%);
+  max-width: 100%;
 }
 
 /* ========================
@@ -311,8 +317,8 @@ typography
 .about {
   grid-area: about-section;
   grid-template-areas:
-    ".    head .    .    .    .    . . . . .  ."
-    ".    .    .    .    .    .    . . . . .  ."
+    /* ".    head .    .    .    .    . . . . .  ."
+    ".    .    .    .    .    .    . . . . .  ." */
     ".    Ac   Ac   Ac   Ac   .    . . . . At ."
     ".    SRt  SRc  SRc  SRc  SRc  . . . . .  ."
     ".    AIt  AIc  AIc  AIc  AIc  . . . . .  .";
@@ -351,17 +357,12 @@ typography
   grid-template-areas: ". Os Os Os Os . . Obm Obm Obm Obm .";
 
   /* space above outlook section 
-     1/12 vw */
+     - 1/12 vw */
   margin-top: var(--one-twelth-vw);
 
   /* space below outlook section 
-     0.5/12 vw */
-  margin-bottom: var(--oneohhalf-twelth-vw);
-
-  /* 
-  review: 
-      clamp(MIN, VAL, MAX) resolves to max(MIN, min(VAL, MAX)) 
-  */
+      - optimal spacing is 1/24vw */
+  margin-bottom: clamp(1rem, var(--one-twentyfourth-vw), 2rem);
 
   /* height of outlook img to fill screen height */
   max-width: 100vw;
@@ -374,14 +375,6 @@ typography
   grid-area: Os;
 }
 
-/* #outlook-book::before {
-  content: url(/content/img/Icons/CTA_Book.svg);
-  width: var(--one-twelth-custom-vw);
-  height: 200px;
-  position: absolute;
-  z-index: -1;
-} */
-
 #outlook-book-container,
 #outlook-door-container {
   position: relative;
@@ -391,9 +384,6 @@ typography
   fill: #fce57e;
 }
 
-#outlook-book svg {
-  mix-blend-mode: difference;
-}
 /* Book text hover */
 #outlook-book svg:hover path.cls-1,
 #outlook-book svg:focus path.cls-1 {
@@ -405,12 +395,60 @@ typography
   fill: red;
 }
 
+/* ---- Text overlay outlook SVG */
+.outlook-text-overlay {
+  position: absolute;
+  /* text-align: center; */
+  color: var(--bg-difference);
+  background-color: var(--bg-difference-navy);
+
+  /* line-height: ; */
+}
+
+.outlook-text-overlay-container {
+  line-height: 2;
+  height: 100px;
+}
+.outlook-text-overlay {
+  line-height: 1.5;
+}
+
+.outlook-text-overlay-container,
+.outlook-text-p {
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  height: var(--fs-body);
+}
+
+.outlook-book-text {
+  width: var(--one-eighth-vw);
+  bottom: 0;
+  right: 0;
+  margin-bottom: 2em;
+}
+
+.outlook-door-text {
+  text-align: center;
+  top: 33%;
+  display: flex;
+
+  margin: 0 auto;
+}
+
+/* Same as below? */
+/* #outlook-book svg {
+  mix-blend-mode: difference;
+} */
+
 .icon-container-CTA-book,
 .icon-container-CTA-door {
   position: absolute;
   z-index: 9;
   mix-blend-mode: difference;
+  transition: opacity 2000ms;
 }
+
 .icon-container-CTA-book {
   width: var(--one-twelth-custom-vw);
   height: auto;
@@ -420,8 +458,8 @@ typography
 .icon-container-CTA-door {
   width: var(--one-twelth-custom-vw);
   height: auto;
-  bottom: 0;
-  right: 0;
+  bottom: clamp(3em, 30px, 3em);
+  right: clamp(1.5em, 10px, 1em);
 
   /* Task:
   - realign with margin: 0 auto 
@@ -437,6 +475,66 @@ typography
 }
 
 /* ========================
+      Outlook hover states
+========================*/
+
+.icon-container-CTA-book.animated,
+.icon-container-CTA-door.animated,
+.icon-container-CTA-book:hover,
+.icon-container-CTA-door:hover {
+  animation: myOrbit 5s infinite linear;
+  animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes myOrbit {
+  from {
+    transform: rotate(0deg) translateX(0px) rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg) translateX(10px) rotate(-180deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(0px) rotate(-360deg);
+  }
+}
+
+@-moz-keyframes myOrbit {
+  from {
+    transform: rotate(0deg) translateX(0px) rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg) translateX(10px) rotate(-180deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(0px) rotate(-360deg);
+  }
+}
+
+@-o-keyframes myOrbit {
+  from {
+    transform: rotate(0deg) translateX(0px) rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg) translateX(10px) rotate(-180deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(0px) rotate(-360deg);
+  }
+}
+
+@keyframes myOrbit {
+  from {
+    transform: rotate(0deg) translateX(0px) rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg) translateX(10px) rotate(-180deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(0px) rotate(-360deg);
+  }
+}
+
+/* ========================
       footer
 ======================== */
 
@@ -445,6 +543,12 @@ typography
   grid-template-areas: ".   contact    .    address    address    .    . . . cc-ip cc-ip  .";
   min-height: var(--one-twelth-vw);
   transition: opacity 2000ms;
+
+  /* 
+        Task: 
+          - How necessary is padding for mobile vs desktop? 
+  */
+  /* padding-bottom: max(10px, 5%); */
 }
 
 .social-icon {
@@ -495,115 +599,6 @@ typography
 } */
 
 /* ========================
-      media queries
-======================== */
-
-/* 576px */
-@media (max-width: 40em) {
-  body {
-    padding: 2em;
-  }
-  .grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-  .acknowledgement {
-    /* grid-area: acknowledgement-section; */
-    grid-template-areas: "Ack  Ack  Ack";
-  }
-  .header {
-    grid-template-areas: "head ";
-  }
-  .about-title {
-    display: none;
-  }
-  .about {
-    grid-template-areas:
-      "Ac   Ac   Ac"
-      "SRt  SRc  SRc"
-      "AIt  AIc  AIc";
-  }
-
-  .outlook {
-    grid-template-areas:
-      "Os  Os  Os"
-      "Obm Obm Obm";
-    padding: 2em;
-    row-gap: 100px;
-  }
-  .footer {
-    grid-template-columns: 2fr;
-    grid-template-areas:
-      "contact address"
-      "cc-ip cc-ip";
-    /* review:
-          - add grid gap between sections */
-  }
-  .footer > div {
-    padding-bottom: 2em;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-    text-align: end;
-  }
-
-  .footer .contact .contact-icons {
-    display: flex;
-    justify-content: center;
-    justify-content: space-around;
-    align-content: center;
-    text-align: end;
-    /* gap: 2px;
-    grid-auto-flow: column; */
-  }
-}
-/* ========================
-      temp. updates
-======================== */
-
-/* body {
-  background-color: var(--bg-overlay);
-  background-color: var(--bg-main);
-}
-.acknowledgement {
-  visibility: hidden;
-} */
-.acknowledgement p {
-  color: var(--bg-main);
-  /* width: clamp(30ch, 50%, 75ch); */
-}
-
-/* ========================
-      updates to commit
-======================== */
-
-.outlook {
-  grid-area: outlook-section;
-  grid-template-areas:
-    ". Os-book Os-book .  .  . . .   .   .   .   ."
-    ". Os      Os      Os Os . . Obm Obm Obm Obm ."
-    ". .       .       .  .  . . .   .   .   .   .";
-
-  /* space above outlook section 
-     1/12 vw */
-  margin-top: var(--one-twelth-vw);
-
-  /* space below outlook section 
-     0.5/12 vw */
-  margin-bottom: var(--oneohhalf-twelth-vw);
-
-  /* 
-  review: 
-      clamp(MIN, VAL, MAX) resolves to max(MIN, min(VAL, MAX)) 
-  */
-
-  /* height of outlook img to fill screen height */
-  max-width: 100vw;
-
-  /* height of outlook img to not surpass X px */
-  /* max-height: 300px; */
-}
-
-/* ========================
     'under construction'
 ======================== */
 .ribbon {
@@ -634,4 +629,123 @@ typography
     -webkit-transform: translateX(-10%);
     transform: translateX(-10%);
   }
+}
+
+/* ========================
+      media queries
+======================== */
+
+/* 576px */
+@media (max-width: 40em) {
+  body {
+    padding: 2em;
+  }
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .acknowledgement {
+    /* grid-area: acknowledgement-section; */
+    grid-template-areas: "Ack  Ack  Ack";
+  }
+  .header {
+    grid-template-areas: "head";
+  }
+  .grid.header {
+    grid-template-rows: auto;
+  }
+  .about-title {
+    display: none;
+  }
+  .about {
+    grid-template-areas:
+      "Ac   Ac   Ac"
+      "SRt  SRc  SRc"
+      "AIt  AIc  AIc";
+  }
+
+  /* Outlook */
+  .outlook {
+    grid-template-areas:
+      "Os  Os  Os"
+      "Obm Obm Obm";
+    /* top | right | bottom | left */
+    padding: 2em 2em 0em 2em;
+    /* row-gap: 100px; */
+  }
+
+  .icon-container-CTA-book {
+    width: 33%;
+  }
+  .icon-container-CTA-door {
+    width: 33%;
+
+    bottom: clamp(3em, 30px, 3em);
+    right: 1em;
+  }
+
+  .outlook-book-text {
+    width: calc(100vw / 3);
+    bottom: 0;
+    right: 0;
+    margin-bottom: 2em;
+  }
+
+  .outlook-door-text {
+    text-align: center;
+    top: 33%;
+    display: flex;
+
+    margin: 0 auto;
+  }
+
+  /* footer */
+  .address {
+    display: none;
+  }
+  .footer {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "contact cc-ip";
+    /* grid-template-areas:
+      "contact"
+      "address"
+      "cc-ip"; */
+    /* review:
+          - add grid gap between sections */
+  }
+  .footer > div {
+    /* padding-bottom: 2em; */
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    text-align: end;
+  }
+
+  .footer .contact .contact-icons {
+    display: flex;
+    justify-content: start;
+    justify-content: space-around;
+    align-content: flex-start;
+
+    /* gap: 2px;
+    grid-auto-flow: column; */
+  }
+
+  .ribbon {
+    transform: translateX(45%) translateY(0%) rotate(45deg);
+  }
+}
+/* ========================
+      temp. updates
+======================== */
+
+/* body {
+  background-color: var(--bg-overlay);
+  background-color: var(--bg-main);
+}
+.acknowledgement {
+  visibility: hidden;
+} */
+.acknowledgement p {
+  color: var(--bg-main);
+  /* width: clamp(30ch, 50%, 75ch); */
 }

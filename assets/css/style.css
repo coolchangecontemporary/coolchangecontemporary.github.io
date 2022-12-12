@@ -14,26 +14,28 @@
 */
 
 @font-face {
-  font-family: "Acumin";
-  src: url("/assets/fonts/Acumin/Acumin-Variable-Concept.ttf") format("truetype");
+  font-family: Acumin;
+  src: url("/assets/fonts/Acumin/Acumin-Variable-Concept.ttf")
+      format("truetype"),
+    url("/assets/fonts/Acumin/AcuminVariableConcept.otf") format("opentype");
 }
 /* @font-face {
   font-family: "Acumin";
   src: url("/assets/fonts/Synt/ABCSynt-Regular-Trial.otf") format("otf");
 } */
 @font-face {
-  font-family: "Synt";
+  font-family: Synt;
   src: url("/assets/fonts/Synt/ABCSynt-Regular-Trial.otf") format("opentype");
 }
 @font-face {
-  font-family: "Synt-em";
+  font-family: Synt-em;
   src: url("/assets/fonts/Synt/ABCSynt-Italic-Trial.otf") format("opentype");
 }
 
 :root {
   /* typography */
-  --ff-primary: "Acumin";
-  --ff-accent: "Synt";
+  --ff-primary: Acumin, "Arial", sans-serif;
+  --ff-accent: Synt-em;
 
   /* body */
   /* --fs-body: 1.3125rem; */
@@ -42,6 +44,7 @@
   --fs-body: 1.08rem;
   --fs-body-small: calc(var(--fs-body) * 0.75);
   --fs-body-line-height: 1.2;
+  --fs-body-line-height: 1.225;
 
   --clr-body: var(--clr-neutral-800);
 
@@ -69,8 +72,16 @@
   --accent: #bdcdfc;
   --bg-main: #ffefd9;
   --bg-overlay: #3041f2;
-  --bg-ribbon: #D3FF75;
-  --fc-ribbon: #FF6915;
+  --bg-ribbon: #d3ff75;
+  --fc-ribbon: #ff6915;
+  --bg-difference: #cfbe0d;
+  --bg-difference-navy: #001026;
+
+  /* general */
+  --one-twelth-vw: calc(100vw / 12);
+  --one-eighth-vw: calc(100vw / 8);
+  --one-twentyfourth-vw: calc(100vw / 24);
+  --one-twelth-custom-vw: calc(100vw / 9);
 }
 
 *,
@@ -81,10 +92,12 @@
 
 body {
   font-family: var(--ff-primary);
-  font-weight: 400;
+  font-weight: 300;
   font-size: var(--fs-body);
-
   line-height: var(--fs-body-line-height);
+
+  /* for mobile padding */
+  /* padding: 0 1em; */
 }
 
 body,
@@ -98,14 +111,11 @@ p {
 h1,
 h2,
 h3 {
-  /* color: var(--clr-header);
-  /* font-weight: 900; */
+  font-size: var(--fs-body);
   font-family: var(--ff-accent);
   line-height: 1;
   margin-bottom: 1em;
-
-  font-size: 18px;
-  font-weight: 400;
+  font-weight: 300;
   font-style: italic;
 
   color: var(--bg-overlay);
@@ -113,11 +123,42 @@ h3 {
 
 em {
   font-family: var(--ff-accent);
-  font-weight: 600;
 }
 
 p {
   margin-bottom: 1em;
+  color: var(--bg-overlay);
+}
+p.last-p {
+  /* set last paragraph of each section to margin 0 */
+  margin-bottom: 0;
+}
+.acknowledgement p {
+  color: var(--bg-main);
+}
+.acknowledgement-accent-text {
+  font-size: smaller;
+  line-height: 1;
+}
+
+.acknowledgement p .acknowledgement-link {
+  background-color: var(--bg-difference);
+  color: var(--bg-difference-navy);
+  text-decoration: none;
+  transition: color 700ms, background-color 700ms;
+  transition: opacity 3000ms;
+}
+.acknowledgement p .acknowledgement-link:hover,
+.acknowledgement p .acknowledgement-link:focus {
+  color: var(--bg-main);
+  color: var(--bg-overlay);
+  background-color: var(--bg-main);
+}
+
+h2,
+h3,
+em {
+  font-family: Synt;
 }
 
 img {
@@ -161,9 +202,11 @@ typography
   display: none !important;
 }
 
-/*
-background 
-*/
+/* ========================
+      background
+======================== */
+
+/*                  uncomment */
 .bg-primary {
   background-color: var(--bg-overlay);
   transition: background-color 3s;
@@ -171,94 +214,36 @@ background
 .bg-primary.bg-other {
   background-color: var(--bg-main);
 }
-.bg-light {
-  background-color: var();
-}
 
 .main {
   transition: opacity 1s;
 }
 
-.acknowledgement p {
-  color: var(--bg-main);
-}
-
+/* 
 .acknowledgement a {
   mix-blend-mode: difference;
-}
-
-header,
-section {
-  /* padding: 3rem 0; */
-  /* border: 1px red solid; */
-  height: 100vh;
-}
-
-@media (min-width: 40em) {
-  header,
-  section {
-    /* padding: 7rem 0; */
-  }
-}
+} */
 
 .container {
   margin: 0 auto;
   width: min(90%, 70.5rem);
 }
 
-.split {
-  display: flex;
-  flex-direction: column;
-}
+/* ========================
+      grid init 
+======================== */
 
-@media (min-width: 40em) {
-  .split {
-    flex-direction: row;
-  }
-  /* for equal columns, all direct children of split */
-  .split > * {
-    flex-basis: 100%;
-  }
-
-  /* adjacent sibling selector, i.e. any element that has a sibling before it */
-  .split > * + * {
-    margin-left: 2em;
-  }
-}
-
-.container--narrow {
-  max-width: 34rem;
-}
-
-section p {
-  /* font-size: 18px; */
-  /* calculate scalable font size  */
-
-  color: var(--bg-overlay);
-}
-
-/* 
-space 
-*/
-
-/* structure skeleton grid */
 .grid {
   display: grid;
+  display: -ms-inline-grid;
+  display: -moz-inline-grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(3, 1fr);
   /* margin: 20px auto; */
 }
-.acknowledgement-content {
-  grid-area: Ack;
+.grid.acknowledgement,
+.grid.header {
+  grid-template-rows: repeat(3, 1fr);
 }
-
-.acknowledgement {
-  grid-template-areas:
-    ".    .    .    .    .    .    . . . . . ."
-    ".    .    Ack  Ack  Ack  .    . . . . . ."
-    ".    .    .    .    .    .    . . . . . .";
-}
-
 .about {
   grid-template-areas:
     "As   .    .    .    .    .    . . . . .  ."
@@ -272,6 +257,20 @@ space
       acknowledgement 
 ======================== */
 
+.acknowledgement-content {
+  grid-area: Ack;
+}
+
+.acknowledgement {
+  /* grid-area: acknowledgement-section; */
+  grid-template-areas:
+    ".    .    .    .    .    .    . . . . . ."
+    ".    .    Ack  Ack  Ack  .    . . . . . ."
+    ".    .    .    .    .    .    . . . . . .";
+
+  /* is this the best way to fix height? */
+  /* height: 100vh; */
+}
 .acknowledgement,
 .acknowledgement a {
   position: absolute;
@@ -285,19 +284,51 @@ space
 }
 
 /* ========================
+      header
+======================== */
+
+.header {
+  grid-template-areas:
+    ".    .    .    .    .    .    . . . . . ."
+    ".    head .    .    .    .    . . . . . .";
+  height: 66.6vh;
+  justify-content: center;
+  justify-items: center;
+  margin: 0 auto;
+
+  /* grid-row: 1 / 4;
+  grid-column: 1 / 4; */
+}
+.header-logo {
+  grid-area: head;
+  display: flex;
+  align-items: center;
+  transition: opacity 2000ms;
+}
+.header-logo img {
+  /* https://web.dev/min-max-clamp/#clamp */
+  /* width: clamp(350px, 100%, 120%); */
+  width: max(150px, 100%);
+  max-width: 100%;
+}
+
+/* ========================
       about
 ======================== */
 
-.space-about {
-  grid-area: As;
-  height: 66.6vh;
-  /* grid-row: 1 / 4;
-  grid-column: 1 / 4; */
+.about {
+  grid-area: about-section;
+  grid-template-areas:
+    /* ".    head .    .    .    .    . . . . .  ."
+    ".    .    .    .    .    .    . . . . .  ." */
+    ".    Ac   Ac   Ac   Ac   .    . . . . At ."
+    ".    SRt  SRc  SRc  SRc  SRc  . . . . .  ."
+    ".    AIt  AIc  AIc  AIc  AIc  . . . . .  .";
 }
 
 .about-title {
   grid-area: At;
-  /* align-items: flex-start; */
+  text-align: end;
 }
 .about-content {
   grid-area: Ac;
@@ -324,21 +355,281 @@ space
       outlook
 ======================== */
 .outlook {
-  margin-top: 1vw;
-  height: 100vh;
+  grid-area: outlook-section;
+  grid-template-areas: ". Os Os Os Os . . Obm Obm Obm Obm .";
+
+  /* space above outlook section 
+     - 1/12 vw */
+  margin-top: var(--one-twelth-vw);
+
+  /* space below outlook section 
+      - optimal spacing is 1/24vw */
+  margin-bottom: clamp(1rem, var(--one-twentyfourth-vw), 2rem);
+
+  /* height of outlook img to fill screen height */
+  max-width: 100vw;
+
+  /* height of outlook img to not surpass X px */
+  /* max-height: 300px; */
 }
 
 .outlook-support {
   grid-area: Os;
 }
 
+#outlook-book-container,
+#outlook-door-container {
+  position: relative;
+}
+
+#outlook-book svg:hover {
+  fill: #fce57e;
+}
+
+/* Book text hover */
+#outlook-book svg:hover path.cls-1,
+#outlook-book svg:focus path.cls-1 {
+  fill: green;
+}
+/* Book urchin hover */
+#outlook-book svg:hover path.cls-1,
+#outlook-book svg:focus path.cls-1 {
+  fill: red;
+}
+
+/* ---- Text overlay outlook SVG */
+.outlook-text-overlay {
+  position: absolute;
+  /* text-align: center; */
+  color: var(--bg-difference);
+  background-color: var(--bg-difference-navy);
+
+  /* line-height: ; */
+}
+
+.outlook-text-overlay-container {
+  line-height: 2;
+  height: 100px;
+}
+.outlook-text-overlay {
+  line-height: 1.5;
+}
+
+.outlook-text-overlay-container,
+.outlook-text-p {
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+  height: var(--fs-body);
+}
+
+.outlook-book-text {
+  width: var(--one-eighth-vw);
+  bottom: 0;
+  right: 0;
+  margin-bottom: 2em;
+}
+
+.outlook-door-text {
+  text-align: center;
+  top: 33%;
+  display: flex;
+
+  margin: 0 auto;
+}
+
+/* Same as below? */
+/* #outlook-book svg {
+  mix-blend-mode: difference;
+} */
+
+.icon-container-CTA-book,
+.icon-container-CTA-door {
+  position: absolute;
+  z-index: 9;
+  mix-blend-mode: difference;
+  transition: opacity 2000ms;
+}
+
+.icon-container-CTA-book {
+  width: var(--one-twelth-custom-vw);
+  height: auto;
+  top: 0;
+  left: 0;
+}
+.icon-container-CTA-door {
+  width: var(--one-twelth-custom-vw);
+  height: auto;
+  bottom: clamp(3em, 30px, 3em);
+  right: clamp(1.5em, 10px, 1em);
+
+  /* Task:
+  - realign with margin: 0 auto 
+  - */
+}
+
 .outlook-bon-marche {
   grid-area: Obm;
 }
 
-.outlook {
-  grid-template-areas: ". Os Os Os Os . . Obm Obm Obm Obm .";
-  overflow-y: hidden;
+.outlook img {
+  width: 100%;
+}
+
+/* ========================
+      Outlook hover states
+========================*/
+
+.icon-container-CTA-book.animated,
+.icon-container-CTA-door.animated,
+.icon-container-CTA-book:hover,
+.icon-container-CTA-door:hover {
+  animation: myOrbit 5s infinite linear;
+  animation-iteration-count: infinite;
+}
+
+@-webkit-keyframes myOrbit {
+  from {
+    transform: rotate(0deg) translateX(0px) rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg) translateX(10px) rotate(-180deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(0px) rotate(-360deg);
+  }
+}
+
+@-moz-keyframes myOrbit {
+  from {
+    transform: rotate(0deg) translateX(0px) rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg) translateX(10px) rotate(-180deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(0px) rotate(-360deg);
+  }
+}
+
+@-o-keyframes myOrbit {
+  from {
+    transform: rotate(0deg) translateX(0px) rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg) translateX(10px) rotate(-180deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(0px) rotate(-360deg);
+  }
+}
+
+@keyframes myOrbit {
+  from {
+    transform: rotate(0deg) translateX(0px) rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg) translateX(10px) rotate(-180deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(0px) rotate(-360deg);
+  }
+}
+
+/* ========================
+      footer
+======================== */
+
+.footer {
+  display: grid;
+  grid-template-areas: ".   contact    .    address    address    .    . . . cc-ip cc-ip  .";
+  min-height: var(--one-twelth-vw);
+  transition: opacity 2000ms;
+
+  /* 
+        Task: 
+          - How necessary is padding for mobile vs desktop? 
+  */
+  /* padding-bottom: max(10px, 5%); */
+}
+
+.social-icon {
+  mix-blend-mode: normal;
+
+  /* review:
+        - not fixed width
+  */
+  width: 100%;
+}
+
+.contact {
+  grid-area: contact;
+}
+.contact p {
+  margin: 0;
+}
+.footer .contact .contact-icons {
+  display: flex;
+  justify-content: space-between;
+  justify-content: center;
+  align-content: center;
+  gap: clamp(2px, 3px, 1em);
+  /* grid-auto-flow: column; */
+}
+
+.address {
+  grid-area: address;
+}
+.address p {
+  margin-bottom: 0;
+}
+
+.cc-ip {
+  grid-area: cc-ip;
+  display: grid;
+  /* centering content */
+  justify-content: center;
+  align-content: center;
+
+  /* review: 
+      - justify content still isn't completely centred with address text 
+      - work from below
+      */
+
+  /* margin-top: calc(var(--fs-body) * 2.2); */
+  /* padding-top: calc((2 * var(--fs-body-line-height))); */
+}
+.cc-ip p {
+  margin-bottom: 0;
+}
+
+#icon-ig path.cls-1,
+#icon-fb path.cls-1,
+#icon-email path.cls-1 {
+  fill: var(--bg-difference);
+  transition: fill 0.4s ease-in-out 0.1s;
+}
+#icon-ig path.cls-2,
+#icon-fb path.cls-2,
+#icon-email path.cls-2 {
+  fill: var(--bg-difference-navy);
+  transition: fill 0.7s ease-in-out;
+}
+#icon-ig path.cls-1:hover,
+#icon-ig path.cls-1:focus,
+#icon-fb path.cls-1:hover,
+#icon-fb path.cls-1:focus,
+#icon-email path.cls-1:hover,
+#icon-email path.cls-1:focus {
+  fill: var(--bg-overlay);
+}
+#icon-ig path.cls-2:hover,
+#icon-fb path.cls-2:hover,
+#icon-email path.cls-2:hover,
+#icon-ig path.cls-2:focus,
+#icon-fb path.cls-2:focus,
+#icon-email path.cls-2:focus {
+  fill: var(--accent);
 }
 
 /* ========================
@@ -372,4 +663,123 @@ space
     -webkit-transform: translateX(-10%);
     transform: translateX(-10%);
   }
+}
+
+/* ========================
+      media queries
+======================== */
+
+/* 576px */
+@media (max-width: 40em) {
+  body {
+    padding: 2em;
+  }
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .acknowledgement {
+    /* grid-area: acknowledgement-section; */
+    grid-template-areas: "Ack  Ack  Ack";
+  }
+  .header {
+    grid-template-areas: "head";
+  }
+  .grid.header {
+    grid-template-rows: auto;
+  }
+  .about-title {
+    display: none;
+  }
+  .about {
+    grid-template-areas:
+      "Ac   Ac   Ac"
+      "SRt  SRc  SRc"
+      "AIt  AIc  AIc";
+  }
+
+  /* Outlook */
+  .outlook {
+    grid-template-areas:
+      "Os  Os  Os"
+      "Obm Obm Obm";
+    /* top | right | bottom | left */
+    padding: 2em 2em 0em 2em;
+    /* row-gap: 100px; */
+  }
+
+  .icon-container-CTA-book {
+    width: 33%;
+  }
+  .icon-container-CTA-door {
+    width: 33%;
+
+    bottom: clamp(3em, 30px, 3em);
+    right: 1em;
+  }
+
+  .outlook-book-text {
+    width: calc(100vw / 3);
+    bottom: 0;
+    right: 0;
+    margin-bottom: 2em;
+  }
+
+  .outlook-door-text {
+    text-align: center;
+    top: 33%;
+    display: flex;
+
+    margin: 0 auto;
+  }
+
+  /* footer */
+  .address {
+    display: none;
+  }
+  .footer {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "contact cc-ip";
+    /* grid-template-areas:
+      "contact"
+      "address"
+      "cc-ip"; */
+    /* review:
+          - add grid gap between sections */
+  }
+  .footer > div {
+    /* padding-bottom: 2em; */
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    text-align: end;
+  }
+
+  .footer .contact .contact-icons {
+    display: flex;
+    justify-content: start;
+    justify-content: space-around;
+    align-content: flex-start;
+
+    /* gap: 2px;
+    grid-auto-flow: column; */
+  }
+
+  .ribbon {
+    transform: translateX(45%) translateY(0%) rotate(45deg);
+  }
+}
+/* ========================
+      temp. updates
+======================== */
+
+/* body {
+  background-color: var(--bg-overlay);
+  background-color: var(--bg-main);
+}
+.acknowledgement {
+  visibility: hidden;
+} */
+.acknowledgement p {
+  color: var(--bg-main);
+  /* width: clamp(30ch, 50%, 75ch); */
 }

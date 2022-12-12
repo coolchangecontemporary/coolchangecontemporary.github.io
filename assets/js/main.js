@@ -8,9 +8,10 @@ function init() {
         // Allow the link on the overlay to be clicked
         if (e.type !== 'click') {
             e.preventDefault();
-        } 
+        }
         // Transition background colour
         $('.bg-primary').addClass('bg-other');
+        $('.acknowledgement-link').addClass('hidden');
 
         // Hide acknowledgement
         $('.acknowledgement').addClass('hidden');
@@ -22,6 +23,13 @@ function init() {
             $('.ribbon').removeClass('hidden');
         }, 1520);
 
+        // Add the ribbon
+        $('.header-logo').removeClass('removed');
+        // Begin ribbon fadein after a delay
+        setTimeout(() => {
+            $('.header-logo').removeClass('hidden');
+        }, 1520);
+
         // Add the main back to the DOM
         setTimeout(() => {
             $('main').removeClass('removed');
@@ -31,12 +39,52 @@ function init() {
             // (by 'a handful of milliseconds' according to MDN) otherwise it won't apply
             $('main').removeClass('hidden');
         }, 3020);
-        
+
+        setTimeout(() => {
+            $('footer').removeClass('removed');
+        }, 3000);
+        setTimeout(() => {
+            // Make the main actually visible - this must be slightly delayed
+            // (by 'a handful of milliseconds' according to MDN) otherwise it won't apply
+            $('footer').removeClass('hidden');
+        }, 3020);
+
         // Fully remove the acknowledgement div after fadeout complete (for accessibility reasons)
         setTimeout(() => {
             $('.acknowledgement').addClass('removed');
         }, 5000);
     });
+
+
+    // Animation for Outlook CTA icons
+    //  - finish full animation cycle after mouse exit
+
+    //  book
+    $(".icon-container-CTA-book").on("animationiteration", function () {
+        $(this).removeClass("animated");
+        console.log("out");
+    });
+
+    $(".icon-container-CTA-book").hover(function () {
+        $(this).addClass("animated");
+        console.log("over");
+    });
+
+    //  door
+    $(".icon-container-CTA-door").on("animationiteration", function () {
+        $(this).removeClass("animated");
+        console.log("out");
+    });
+
+    $(".icon-container-CTA-door").hover(function () {
+        $(this).addClass("animated");
+        console.log("over");
+    });
+
+    //svg path
+    // let svgRoot = SVG.doc(300, 300, document.body)
+
+
 }
 
 /*

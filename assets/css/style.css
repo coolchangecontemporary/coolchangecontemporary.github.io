@@ -239,10 +239,10 @@ typography
   grid-template-columns: repeat(12, 1fr);
   /* margin: 20px auto; */
 }
-.grid.acknowledgement,
+/* .grid.acknowledgement,
 .grid.header {
   grid-template-rows: repeat(3, 1fr);
-}
+} */
 .about {
   grid-template-areas:
     "As   .    .    .    .    .    . . . . .  ."
@@ -269,7 +269,15 @@ typography
   /* is this the best way to fix height? */
   /* height: 100vh; */
 }
-
+.acknowledgement {
+  grid-template-areas:
+    ".    .    .    .    .    .    . . . . . ."
+    ".    .    Ack  Ack  Ack  .    . . . . . .";
+  height: 66.6vh;
+  justify-content: center;
+  justify-items: center;
+  margin: 0 auto;
+}
 .acknowledgement,
 .acknowledgement a {
   position: absolute;
@@ -557,19 +565,22 @@ typography
   /* review:
         - not fixed width
   */
-  width: 1.5em;
+  width: 100%;
 }
 
 .contact {
   grid-area: contact;
 }
+.contact p {
+  margin: 0;
+}
 .footer .contact .contact-icons {
   display: flex;
+  justify-content: space-between;
   justify-content: center;
-  justify-content: space-around;
   align-content: center;
-  /* gap: 2px;
-  grid-auto-flow: column; */
+  gap: clamp(2px, 3px, 1em);
+  /* grid-auto-flow: column; */
 }
 
 .address {
@@ -585,18 +596,47 @@ typography
   /* centering content */
   justify-content: center;
   align-content: center;
+
+  /* review: 
+      - justify content still isn't completely centred with address text 
+      - work from below
+      */
+
+  /* margin-top: calc(var(--fs-body) * 2.2); */
+  /* padding-top: calc((2 * var(--fs-body-line-height))); */
 }
 .cc-ip p {
   margin-bottom: 0;
 }
 
-/* 
-.icon-ig {
+#icon-ig path.cls-1,
+#icon-fb path.cls-1,
+#icon-email path.cls-1 {
+  fill: var(--bg-difference);
+  transition: fill 0.4s ease-in-out 0.1s;
 }
-.icon-fb {
+#icon-ig path.cls-2,
+#icon-fb path.cls-2,
+#icon-email path.cls-2 {
+  fill: var(--bg-difference-navy);
+  transition: fill 0.7s ease-in-out;
 }
-.icon-email {
-} */
+#icon-ig path.cls-1:hover,
+#icon-ig path.cls-1:focus,
+#icon-fb path.cls-1:hover,
+#icon-fb path.cls-1:focus,
+#icon-email path.cls-1:hover,
+#icon-email path.cls-1:focus {
+  fill: var(--bg-overlay);
+}
+#icon-ig path.cls-2:hover,
+#icon-fb path.cls-2:hover,
+#icon-email path.cls-2:hover,
+#icon-ig path.cls-2:focus,
+#icon-fb path.cls-2:focus,
+#icon-email path.cls-2:focus {
+  fill: var(--accent);
+}
 
 /* ========================
     'under construction'

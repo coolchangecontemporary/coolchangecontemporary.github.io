@@ -80,6 +80,10 @@ function init() {
         console.log("over");
     });
 
+    //svg path
+    // let svgRoot = SVG.doc(300, 300, document.body)
+
+
 }
 
 /*
